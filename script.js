@@ -1,5 +1,5 @@
 // ==========================================
-// KONFIGURASI SUPABASE (Ganti dengan kunci proyek Anda)
+// KONFIGURASI SUPABASE
 // ==========================================
 const SUPABASE_URL = 'https://donsspcslvpzuphptmft.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvbnNzcGNzbHZwenVwaHB0bWZ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQyNDMyMTMsImV4cCI6MjEwOTgxOTIxM30.P_V9vLXaUdoxY5EGMMQYrL4Ecjze_By6PI-hDj7jyH8';
@@ -11,22 +11,26 @@ const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
 // Cek Sesi Login secara Asinkronus
 async function checkAuthSession() {
-    const { data: { session } } = await supabase.auth.getSession();
-    
-    // Proteksi halaman portal: jika belum login, tendang ke login.html
-    if (currentPage === 'portal.html' && !session) {
-        window.location.href = 'login.html';
-    }
-    // Jika sudah login tapi membuka login.html, arahkan ke portal.html
-    if (currentPage === 'login.html' && session) {
-        window.location.href = 'portal.html';
-    }
+    try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        // Proteksi halaman portal: jika belum login, tendang ke login.html
+        if (currentPage === 'portal.html' && !session) {
+            window.location.href = 'login.html';
+        }
+        // Jika sudah login tapi membuka login.html, arahkan ke portal.html
+        if (currentPage === 'login.html' && session) {
+            window.location.href = 'portal.html';
+        }
 
-    // Ubah teks menu navigasi bawah jika sudah login
-    const authNavLink = document.getElementById('authNavLink');
-    if (authNavLink && session) {
-        authNavLink.textContent = 'PORTAL';
-        authNavLink.href = 'portal.html';
+        // Ubah teks menu navigasi bawah jika sudah login
+        const authNavLink = document.getElementById('authNavLink');
+        if (authNavLink && session) {
+            authNavLink.textContent = 'PORTAL';
+            authNavLink.href = 'portal.html';
+        }
+    } catch (err) {
+        console.error('Auth session check error:', err);
     }
 }
 checkAuthSession();
@@ -40,14 +44,20 @@ if (loginForm) {
         const password = document.getElementById('loginPassword').value.trim();
         const errorMsg = document.getElementById('errorMsg');
 
+        if (errorMsg) errorMsg.style.display = 'none';
+
         const { data, error } = await supabase.auth.signInWithPassword({
             email: email,
             password: password,
         });
 
         if (error) {
-            errorMsg.style.display = 'block';
-            errorMsg.textContent = error.message;
+            if (errorMsg) {
+                errorMsg.style.display = 'block';
+                errorMsg.textContent = error.message;
+            } else {
+                alert('Login Gagal: ' + error.message);
+            }
         } else {
             window.location.href = 'portal.html';
         }
