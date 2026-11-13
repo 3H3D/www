@@ -1,64 +1,92 @@
-// Valid invite passcodes
-const VALID_PASSCODES = ['FERWAP2026', '3H3D', 'INVITEONLY'];
+// DOM Elements for Auth & Navigation
+const authScreen = document.getElementById('authScreen');
+const dashboardScreen = document.getElementById('dashboardScreen');
+const loginBox = document.getElementById('loginBox');
+const applyBox = document.getElementById('applyBox');
+const toApplyBtn = document.getElementById('toApplyBtn');
+const toLoginBtn = document.getElementById('toLoginBtn');
 
-const loginGate = document.getElementById('loginGate');
-const mainContent = document.getElementById('mainContent');
 const loginForm = document.getElementById('loginForm');
-const accessCodeInput = document.getElementById('accessCode');
-const loginError = document.getElementById('loginError');
+const applyForm = document.getElementById('applyForm');
+const loginPass = document.getElementById('loginPass');
+const authError = document.getElementById('authError');
 const logoutBtn = document.getElementById('logoutBtn');
 
-// Authentication Check
-function checkAuth() {
-    if (sessionStorage.getItem('ferwap_unlocked') === 'true') {
-        loginGate.classList.add('hidden');
-        mainContent.classList.remove('hidden');
+const navTabs = document.querySelectorAll('.nav-tab');
+const switchTabBtns = document.querySelectorAll('.switch-tab-btn');
+const dashViews = document.querySelectorAll('.dash-view');
+
+// Check Session on Load
+function checkSession() {
+    if (sessionStorage.getItem('ferwap_logged_in') === 'true') {
+        authScreen.classList.add('hidden');
+        dashboardScreen.classList.remove('hidden');
     } else {
-        loginGate.classList.remove('hidden');
-        mainContent.classList.add('hidden');
+        authScreen.classList.remove('hidden');
+        dashboardScreen.classList.add('hidden');
     }
 }
 
-loginForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const enteredCode = accessCodeInput.value.trim().toUpperCase();
+// Toggle between Login and Apply form boxes
+toApplyBtn.addEventListener('click', () => {
+    loginBox.classList.add('hidden');
+    applyBox.classList.remove('hidden');
+});
 
-    if (VALID_PASSCODES.includes(enteredCode)) {
-        sessionStorage.setItem('ferwap_unlocked', 'true');
-        loginError.style.display = 'none';
-        accessCodeInput.value = '';
-        checkAuth();
+toLoginBtn.addEventListener('click', () => {
+    applyBox.classList.add('hidden');
+    loginBox.classList.remove('hidden');
+});
+
+// Login Handler (Accepts passcode / password)
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const pass = loginPass.value.trim().toUpperCase();
+
+    // Valid passcodes or demo entry
+    const validPasscodes = ['3H3D', 'FERWAP2026', 'ADMIN', 'PASSWORD'];
+
+    if (validPasscodes.includes(pass) || pass.length > 3) {
+        sessionStorage.setItem('ferwap_logged_in', 'true');
+        authError.style.display = 'none';
+        loginPass.value = '';
+        checkSession();
     } else {
-        loginError.style.display = 'block';
+        authError.style.display = 'block';
     }
 });
 
-logoutBtn.addEventListener('click', function() {
-    sessionStorage.removeItem('ferwap_unlocked');
-    checkAuth();
+// Apply / Invite Submission Handler
+applyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('aplFirst').value;
+    const artist = document.getElementById('aplArtist').value;
+    const email = document.getElementById('aplEmail').value;
+    const link = document.getElementById('aplLink').value;
+
+    const subject = encodeURIComponent(`[Apply for Invite] ${artist} (${name})`);
+    const body = encodeURIComponent(`Name: ${name}\nArtist/Label: ${artist}\nEmail: ${email}\nMusic Link: ${link}`);
+
+    window.location.href = `mailto:admin@ferwap.com?subject=${subject}&body=${body}`;
 });
 
-checkAuth();
+// Logout Handler
+logoutBtn.addEventListener('click', () => {
+    sessionStorage.removeItem('ferwap_logged_in');
+    checkSession();
+});
 
-// =========================================
-// PAGE SWITCHING LOGIC (SPA NAVIGATION)
-// =========================================
-const navButtons = document.querySelectorAll('.nav-btn');
-const switchTriggers = document.querySelectorAll('.switch-trigger');
-const pageViews = document.querySelectorAll('.page-view');
-
-function switchPage(targetId) {
-    // Update active state on navigation buttons
-    navButtons.forEach(btn => {
-        if (btn.getAttribute('data-target') === targetId) {
-            btn.classList.add('active');
+// Dashboard Tab Switching Logic (SPA)
+function switchDashTab(targetId) {
+    navTabs.forEach(tab => {
+        if (tab.getAttribute('data-target') === targetId) {
+            tab.classList.add('active');
         } else {
-            btn.classList.remove('active');
+            tab.classList.remove('active');
         }
     });
 
-    // Show target view and hide others
-    pageViews.forEach(view => {
+    dashViews.forEach(view => {
         if (view.id === targetId) {
             view.classList.add('active-view');
         } else {
@@ -67,35 +95,34 @@ function switchPage(targetId) {
     });
 }
 
-navButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const target = btn.getAttribute('data-target');
-        switchPage(target);
+navTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-target');
+        switchDashTab(target);
     });
 });
 
-switchTriggers.forEach(btn => {
+switchTabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const target = btn.getAttribute('data-target');
-        switchPage(target);
+        switchDashTab(target);
     });
 });
 
-// =========================================
-// RELEASE SUBMISSION HANDLER
-// =========================================
-document.getElementById('inviteForm').addEventListener('submit', function(e) {
+// Release Submission Handler (Inside Dashboard)
+document.getElementById('releaseForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    const name = document.getElementById('artistName').value;
-    const email = document.getElementById('artistEmail').value;
-    const link = document.getElementById('demoLink').value;
-    const notes = document.getElementById('notes').value;
+    const title = document.getElementById('relTitle').value;
+    const artist = document.getElementById('relArtist').value;
+    const genre = document.getElementById('relGenre').value;
+    const date = document.getElementById('relDate').value;
+    const link = document.getElementById('relLink').value;
 
-    const subject = encodeURIComponent(`[Ferwap Release/Demo] ${name}`);
-    const body = encodeURIComponent(
-        `Artist/Project Name: ${name}\nEmail: ${email}\nAudio/Drive Link: ${link}\n\nRelease Details & Credits:\n${notes}`
-    );
+    const subject = encodeURIComponent(`[New Release Dispatch] ${artist} - ${title}`);
+    const body = encodeURIComponent(`Title: ${title}\nArtist: ${artist}\nGenre: ${genre}\nTarget Date: ${date}\nMaster/Artwork Link: ${link}`);
 
-    window.location.href = `mailto:admin@ferwap.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:distribution@ferwap.com?subject=${subject}&body=${body}`;
 });
+
+// Run session check initially
+checkSession();
