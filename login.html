@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In — FERWAP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-shell">
+        <main class="viewport center-viewport">
+            <div class="login-container">
+                <h2>PORTAL ACCESS</h2>
+                <p>Enter your artist passcode to access the distribution desk.</p>
+                
+                <form id="loginForm">
+                    <input type="password" id="passcodeInput" placeholder="PASSCODE" required autocomplete="off">
+                    <p id="errorMsg" class="error-text">Invalid passcode.</p>
+                    <button type="submit">ENTER</button>
+                </form>
+
+                <div class="request-link">
+                    <a href="mailto:admin@ferwap.com?subject=%5BRequest%20Passcode%5D">Request an Invite</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bottom-nav">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="publishing.html" class="nav-link">PUBLISHING</a>
+            <a href="login.html" id="authNavLink" class="nav-link active">LOG IN</a>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
