@@ -19,7 +19,7 @@ body, html {
 }
 
 /* ==========================================
-   HOME PAGE (TETAP SAMA DENGAN REFERENSI 1)
+   HOME PAGE (SISI UTAMA)
    ========================================== */
 .app-shell {
     display: flex;
@@ -51,7 +51,7 @@ body, html {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .center-brand {
@@ -89,14 +89,13 @@ body, html {
 .nav-link:hover, .nav-link.active { color: #ffffff; }
 
 /* ==========================================
-   LOGIN PAGE (PERSIS REFERENSI GAMBAR 1)
+   LOGIN PAGE (TEMA HITAM & EMAS EKSKLUSIF)
    ========================================== */
 .login-page-bg {
-    background:
-        radial-gradient(circle at 12% 85%, #1d4e78 0%, transparent 45%),
-        radial-gradient(circle at 88% 20%, #3d526e 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, #4d4d52 0%, #1c1d21 100%);
-    background-color: #25272c;
+    background: 
+        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(138, 114, 32, 0.06) 0%, transparent 40%),
+        #070709;
 }
 
 .login-main {
@@ -110,22 +109,22 @@ body, html {
 
 .security-notice {
     text-align: center;
-    max-width: 660px;
-    margin-bottom: 44px;
-    color: #0e1013;
+    max-width: 620px;
+    margin-bottom: 40px;
+    color: #a1a1aa;
 }
 
 .security-notice strong {
     display: block;
-    font-size: 0.98rem;
-    font-weight: 700;
-    margin-bottom: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f4f4f5;
+    margin-bottom: 6px;
 }
 
 .security-notice p {
-    font-size: 0.94rem;
+    font-size: 0.9rem;
     line-height: 1.5;
-    font-weight: 400;
 }
 
 .login-form-box {
@@ -141,46 +140,52 @@ body, html {
 
 .input-block label {
     display: block;
-    font-size: 0.8rem;
-    color: #e8e8ec;
+    font-size: 0.78rem;
+    color: #d4d4d8;
     margin-bottom: 6px;
+    letter-spacing: 0.5px;
 }
 
 .input-block input {
     width: 100%;
-    background-color: #111113;
-    border: 1px solid #1a1a1e;
+    background-color: #121217;
+    border: 1px solid #22222d;
     border-radius: 6px;
     padding: 12px 14px;
     color: #ffffff;
     font-size: 0.9rem;
     outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-block input:focus {
+    border-color: #d4af37; /* Aksen garis emas lembut saat diklik */
 }
 
 .input-block input::placeholder {
-    color: #9e9ea6;
+    color: #52525b;
 }
 
 .forgot-row {
     text-align: right;
-    margin-top: -6px;
-    margin-bottom: 32px;
+    margin-top: -4px;
+    margin-bottom: 28px;
 }
 
 .forgot-row a {
     font-size: 0.72rem;
-    color: #e2e2e8;
+    color: #a1a1aa;
     text-decoration: none;
     letter-spacing: 0.5px;
     text-transform: uppercase;
 }
 
 .forgot-row a:hover {
-    text-decoration: underline;
+    color: #d4af37;
 }
 
 .error-msg {
-    color: #ff6b6b;
+    color: #ef4444;
     font-size: 0.82rem;
     text-align: center;
     margin-bottom: 12px;
@@ -190,27 +195,29 @@ body, html {
 .btn-pill-white {
     width: 100%;
     background-color: #ffffff;
-    color: #111113;
+    color: #09090b;
     border: none;
     border-radius: 999px;
     padding: 13px 24px;
     font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: background-color 0.2s;
 }
 
 .btn-pill-white:hover {
-    opacity: 0.9;
+    background-color: #d4af37; /* Berubah jadi aksen emas saat disentuh */
 }
 
 /* ==========================================
-   PUBLISHING PAGE (PERSIS REFERENSI GAMBAR 2)
+   PUBLISHING PAGE (TEMA GELAP ELEGAN & EMAS)
    ========================================== */
 .publishing-page-bg {
-    background: linear-gradient(180deg, #434347 0%, #2d2d30 55%, #1d1d20 100%);
+    background: 
+        radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        #070709;
 }
 
 .publishing-main {
@@ -224,22 +231,22 @@ body, html {
 }
 
 .pub-intro {
-    max-width: 760px;
-    margin-bottom: 52px;
+    max-width: 740px;
+    margin-bottom: 48px;
 }
 
 .pub-top-text {
-    font-size: 1.05rem;
-    color: #e4e4e7;
+    font-size: 1.02rem;
+    color: #a1a1aa;
     line-height: 1.6;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }
 
 .pub-main-text {
-    font-size: 1.15rem;
-    color: #ffffff;
+    font-size: 1.12rem;
+    color: #f4f4f5;
     line-height: 1.6;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .pub-form-section {
@@ -248,67 +255,77 @@ body, html {
 }
 
 .pub-form-section h2 {
-    font-size: 1.55rem;
+    font-size: 1.45rem;
     font-weight: 600;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
     color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
 .pub-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px 24px;
+    gap: 20px 22px;
     text-align: left;
-    margin-bottom: 38px;
+    margin-bottom: 36px;
 }
 
 .pub-field label {
     display: block;
     font-size: 0.78rem;
-    color: #e4e4e7;
+    color: #a1a1aa;
     margin-bottom: 6px;
     padding-left: 10px;
+    letter-spacing: 0.5px;
 }
 
 .pub-field input {
     width: 100%;
-    background-color: #9e9ea2;
-    border: none;
+    background-color: #121217;
+    border: 1px solid #22222d;
     border-radius: 999px;
-    padding: 11px 18px;
-    color: #111113;
+    padding: 12px 18px;
+    color: #ffffff;
     font-size: 0.9rem;
     outline: none;
+    transition: border-color 0.2s;
+}
+
+.pub-field input:focus {
+    border-color: #d4af37;
 }
 
 .pub-field input::placeholder {
-    color: #3a3a40;
+    color: #52525b;
 }
 
 .btn-pill-navy {
-    background-color: #191952;
+    background-color: #181822;
     color: #ffffff;
-    border: none;
+    border: 1px solid #333342;
     border-radius: 999px;
     padding: 13px 68px;
     font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 1.2px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
 }
 
 .btn-pill-navy:hover {
-    background-color: #23236e;
+    background-color: #d4af37;
+    color: #000000;
+    border-color: #d4af37;
 }
 
 /* ==========================================
-   SHARED DARK FOOTER (PERSIS REFERENSI 1 & 2)
+   SHARED DARK FOOTER
    ========================================== */
 .dark-footer {
-    background-color: #000000;
-    padding: 20px 16px;
+    background-color: #040405;
+    border-top: 1px solid #141419;
+    padding: 22px 16px;
     text-align: center;
     width: 100%;
 }
@@ -321,38 +338,44 @@ body, html {
 }
 
 .social-icons a {
-    color: #ffffff;
+    color: #a1a1aa;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 700;
+    transition: color 0.2s;
+}
+
+.social-icons a:hover {
+    color: #ffffff;
 }
 
 .copyright {
     font-size: 0.75rem;
-    color: #e4e4e7;
+    color: #71717a;
     margin-bottom: 4px;
 }
 
 .powered {
     font-size: 0.75rem;
-    color: #d4d4d8;
+    color: #71717a;
     margin-bottom: 8px;
 }
 
 .footer-mini-nav {
     font-size: 0.7rem;
-    color: #666;
+    color: #52525b;
 }
 
 .footer-mini-nav a {
-    color: #888;
+    color: #71717a;
     text-decoration: none;
     letter-spacing: 1px;
     margin: 0 6px;
+    transition: color 0.2s;
 }
 
 .footer-mini-nav a:hover {
-    color: #fff;
+    color: #ffffff;
 }
 
 @media (max-width: 768px) {
