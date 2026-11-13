@@ -1,4 +1,4 @@
-// Daftar kode undangan yang valid (bisa Anda ubah atau tambah sesuai kebutuhan)
+// Valid invite passcodes
 const VALID_PASSCODES = ['FERWAP2026', '3H3D', 'INVITEONLY'];
 
 const loginGate = document.getElementById('loginGate');
@@ -8,7 +8,7 @@ const accessCodeInput = document.getElementById('accessCode');
 const loginError = document.getElementById('loginError');
 const logoutBtn = document.getElementById('logoutBtn');
 
-// Cek apakah pengguna sudah login di sesi browser ini
+// Authentication Check
 function checkAuth() {
     if (sessionStorage.getItem('ferwap_unlocked') === 'true') {
         loginGate.classList.add('hidden');
@@ -19,7 +19,6 @@ function checkAuth() {
     }
 }
 
-// Proses verifikasi kode undangan
 loginForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const enteredCode = accessCodeInput.value.trim().toUpperCase();
@@ -34,17 +33,57 @@ loginForm.addEventListener('submit', function(e) {
     }
 });
 
-// Tombol Lock / Keluar di menu atas
-logoutBtn.addEventListener('click', function(e) {
-    e.preventDefault();
+logoutBtn.addEventListener('click', function() {
     sessionStorage.removeItem('ferwap_unlocked');
     checkAuth();
 });
 
-// Jalankan pengecekan saat halaman pertama kali dibuka
 checkAuth();
 
-// Handler untuk formulir pengajuan
+// =========================================
+// PAGE SWITCHING LOGIC (SPA NAVIGATION)
+// =========================================
+const navButtons = document.querySelectorAll('.nav-btn');
+const switchTriggers = document.querySelectorAll('.switch-trigger');
+const pageViews = document.querySelectorAll('.page-view');
+
+function switchPage(targetId) {
+    // Update active state on navigation buttons
+    navButtons.forEach(btn => {
+        if (btn.getAttribute('data-target') === targetId) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // Show target view and hide others
+    pageViews.forEach(view => {
+        if (view.id === targetId) {
+            view.classList.add('active-view');
+        } else {
+            view.classList.remove('active-view');
+        }
+    });
+}
+
+navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        switchPage(target);
+    });
+});
+
+switchTriggers.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        switchPage(target);
+    });
+});
+
+// =========================================
+// RELEASE SUBMISSION HANDLER
+// =========================================
 document.getElementById('inviteForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -53,9 +92,9 @@ document.getElementById('inviteForm').addEventListener('submit', function(e) {
     const link = document.getElementById('demoLink').value;
     const notes = document.getElementById('notes').value;
 
-    const subject = encodeURIComponent(`[Ferwap Invite Application] ${name}`);
+    const subject = encodeURIComponent(`[Ferwap Release/Demo] ${name}`);
     const body = encodeURIComponent(
-        `Artist/Project Name: ${name}\nEmail: ${email}\nDemo/Catalog Link: ${link}\n\nProject Notes:\n${notes}`
+        `Artist/Project Name: ${name}\nEmail: ${email}\nAudio/Drive Link: ${link}\n\nRelease Details & Credits:\n${notes}`
     );
 
     window.location.href = `mailto:admin@ferwap.com?subject=${subject}&body=${body}`;
