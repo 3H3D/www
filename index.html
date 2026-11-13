@@ -3,171 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FERWAP — Curated Music Collective & Distribution</title>
+    <title>FERWAP — Independent Music Distribution & Label Services</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- CINEMATIC SPLIT-SCREEN LOGIN GATE -->
-    <div id="loginGate" class="gate-container">
-        <!-- Left Side: Cinematic Visual & Collective Note -->
-        <div class="gate-visual">
-            <div class="visual-overlay"></div>
-            <div class="visual-content">
-                <span class="visual-tag">Curated Independent Collective</span>
-                <h2>Sound Without Boundaries.</h2>
-                <p class="visual-note">
-                    "An invite-only sanctuary for independent creators, focusing on sonic authenticity, clean metadata, and direct global distribution."
-                </p>
-                <div class="visual-credit">
-                    <span class="credit-dot"></span>
-                    <span>Featured Roster: 3H3D • Ferrson • ANDER</span>
-                </div>
+    <!-- ==========================================
+         PUBLIC / LOGIN GATE (ACTS STYLE)
+         ========================================== -->
+    <div id="authScreen" class="auth-screen">
+        <div class="auth-container">
+            <div class="brand-header">
+                <h1>FERWAP</h1>
+                <p>Built for Independent Artists & Teams.</p>
             </div>
-        </div>
 
-        <!-- Right Side: Login Form -->
-        <div class="gate-form-side">
-            <div class="gate-box">
-                <div class="logo">FERWAP</div>
-                <p class="gate-subtitle">Enter your private access passcode to unlock the collective portal.</p>
+            <!-- Login Form Box -->
+            <div id="loginBox" class="auth-box">
+                <h2>Log In</h2>
+                <p class="auth-desc">Access your distribution dashboard and catalog management.</p>
                 
                 <form id="loginForm">
                     <div class="form-group">
-                        <label for="accessCode">Invite Passcode</label>
-                        <input type="password" id="accessCode" placeholder="••••••••" required autocomplete="off">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="name@domain.com" required>
                     </div>
-                    <p id="loginError" class="error-msg">Invalid access code. Please verify your invitation.</p>
-                    <button type="submit" class="btn-primary full-width">Unlock Portal</button>
+                    <div class="form-group">
+                        <label for="loginPass">Password / Invite Passcode</label>
+                        <input type="password" id="loginPass" placeholder="••••••••" required>
+                    </div>
+                    <p id="authError" class="error-text">Invalid credentials or passcode. Please check again.</p>
+                    <button type="submit" class="btn-solid">Sign In</button>
                 </form>
 
-                <div class="gate-footer">
-                    <span>Not a member yet?</span>
-                    <a href="mailto:admin@ferwap.com?subject=%5BFerwap%20Invite%20Request%5D">Request an Invitation</a>
+                <div class="auth-switch">
+                    <span>Don't have an account?</span>
+                    <button type="button" id="toApplyBtn">Apply for an Invite</button>
                 </div>
+            </div>
+
+            <!-- Apply / Register Box (Hidden by default) -->
+            <div id="applyBox" class="auth-box hidden">
+                <h2>Apply For An Invite</h2>
+                <p class="auth-desc">We work with select independent artists and labels. Tell us about your project.</p>
+                
+                <form id="applyForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" id="aplFirst" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Artist / Label Name</label>
+                            <input type="text" id="aplArtist" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="aplEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Link to Music (Spotify, Soundcloud, Drive)</label>
+                        <input type="url" id="aplLink" placeholder="https://..." required>
+                    </div>
+                    <button type="submit" class="btn-solid">Submit Application</button>
+                </form>
+
+                <div class="auth-switch">
+                    <span>Already have access?</span>
+                    <button type="button" id="toLoginBtn">Back to Log In</button>
+                </div>
+            </div>
+
+            <div class="auth-footer-note">
+                <p>Major support. Without the major. | Curated by Ferwap Music</p>
             </div>
         </div>
     </div>
 
-    <!-- MAIN PORTAL (PAGE-SWITCHING ARCHITECTURE) -->
-    <div id="mainContent" class="portal-wrapper hidden">
-        <header>
-            <div class="logo">FERWAP</div>
-            <nav class="page-nav">
-                <button class="nav-btn active" data-target="page-overview">Overview</button>
-                <button class="nav-btn" data-target="page-services">Services</button>
-                <button class="nav-btn" data-target="page-roster">Roster</button>
-                <button class="nav-btn" data-target="page-apply">Submit Release</button>
+
+    <!-- ==========================================
+         INTERNAL DASHBOARD (AFTER LOGIN)
+         ========================================== -->
+    <div id="dashboardScreen" class="dashboard-screen hidden">
+        <!-- Top Navigation Bar -->
+        <header class="dash-header">
+            <div class="dash-logo">FERWAP <span>DISTRO</span></div>
+            <nav class="dash-nav">
+                <button class="nav-tab active" data-target="tab-overview">Overview</button>
+                <button class="nav-tab" data-target="tab-releases">Releases</button>
+                <button class="nav-tab" data-target="tab-splits">Revenue Splits</button>
+                <button class="nav-tab" data-target="tab-upload">Upload / Submit</button>
             </nav>
-            <button id="logoutBtn" class="logout-btn">Lock</button>
+            <div class="dash-user-actions">
+                <span class="user-badge">3H3D (Admin)</span>
+                <button id="logoutBtn" class="btn-outline-sm">Log Out</button>
+            </div>
         </header>
 
-        <main class="page-viewport">
+        <!-- Main Viewport Area -->
+        <main class="dash-content">
             
-            <!-- PAGE 1: OVERVIEW -->
-            <section id="page-overview" class="page-view active-view">
-                <div class="hero-center">
-                    <span class="badge">Invite-Only Collective & Distribution</span>
-                    <h1>Curated Independent Music Collective & Distribution.</h1>
-                    <p>Empowering independent artists with global digital distribution, metadata integrity, and creative collaboration—without traditional label bureaucracy.</p>
-                    <div class="hero-actions">
-                        <button class="btn-primary switch-trigger" data-target="page-apply">Submit a Release</button>
-                        <button class="btn-secondary switch-trigger" data-target="page-roster">Explore Roster</button>
+            <!-- TAB 1: OVERVIEW -->
+            <section id="tab-overview" class="dash-view active-view">
+                <div class="welcome-banner">
+                    <h2>Welcome back, 3H3D.</h2>
+                    <p>Your catalog is active across global digital service providers with verified metadata.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">Active Releases</span>
+                        <h3 class="stat-val">4 Singles</h3>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">ISNI / Metadata Registry</span>
+                        <h3 class="stat-val">Verified</h3>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Royalty Split Status</span>
+                        <h3 class="stat-val">Active (100%)</h3>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h3>Recent Distribution Status</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Release Title</th>
+                                    <th>Artist</th>
+                                    <th>ISRC</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Latest Single 2026</td>
+                                    <td>3H3D</td>
+                                    <td>ID-XXX-26-00001</td>
+                                    <td><span class="status-live">Live on DSPs</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Collaborative Work</td>
+                                    <td>Ferrson</td>
+                                    <td>ID-XXX-26-00002</td>
+                                    <td><span class="status-live">Live on DSPs</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </section>
 
-            <!-- PAGE 2: SERVICES -->
-            <section id="page-services" class="page-view">
-                <div class="view-header">
-                    <span class="section-label">Infrastructure</span>
-                    <h2>What We Do</h2>
+            <!-- TAB 2: RELEASES -->
+            <section id="tab-releases" class="dash-view">
+                <div class="section-top-flex">
+                    <div>
+                        <h2>Catalog & Releases</h2>
+                        <p>Manage your active tracks, metadata, and streaming store endpoints.</p>
+                    </div>
+                    <button class="btn-solid switch-tab-btn" data-target="tab-upload">+ New Release</button>
                 </div>
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-num">01</div>
-                        <h3>Curated Distribution</h3>
-                        <p>Seamless delivery to Spotify, Apple Music, YouTube Music, and global streaming platforms with precision metadata standards.</p>
+
+                <div class="release-list-grid">
+                    <div class="release-item-card">
+                        <div class="release-info">
+                            <h4>Selected Track 01</h4>
+                            <span>Primary Artist: 3H3D • UPC: 885000000000</span>
+                        </div>
+                        <div class="release-meta-tags">
+                            <span>Spotify</span>
+                            <span>Apple Music</span>
+                            <span>YouTube Music</span>
+                        </div>
                     </div>
-                    <div class="card">
-                        <div class="card-num">02</div>
-                        <h3>Metadata & Rights Integrity</h3>
-                        <p>Structured ISRC, UPC, and transparent songwriting/production credits to protect and organize your catalog properly.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-num">03</div>
-                        <h3>Creative Collective</h3>
-                        <p>A collaborative network built for independent creators to share resources, cross-promote releases, and grow together.</p>
+                    <div class="release-item-card">
+                        <div class="release-info">
+                            <h4>Selected Track 02</h4>
+                            <span>Primary Artist: Ferrson • UPC: 885000000001</span>
+                        </div>
+                        <div class="release-meta-tags">
+                            <span>Spotify</span>
+                            <span>Apple Music</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- PAGE 3: ROSTER -->
-            <section id="page-roster" class="page-view">
-                <div class="view-header">
-                    <span class="section-label">Collective Members</span>
-                    <h2>Selected Roster</h2>
-                </div>
-                <div class="roster-list">
-                    <div class="roster-item">
-                        <div class="roster-info">
-                            <h4>3H3D</h4>
-                            <span>Singer • Songwriter • Producer</span>
-                        </div>
-                        <a href="https://3h3dofficial.web.id" target="_blank" class="roster-link">Official Site &rarr;</a>
+            <!-- TAB 3: REVENUE SPLITS -->
+            <section id="tab-splits" class="dash-view">
+                <h2>Revenue Splits & Collaborators</h2>
+                <p class="section-sub">Manage direct revenue distribution transparency with your team members and co-writers.</p>
+                
+                <div class="split-box">
+                    <div class="split-row header-row">
+                        <span>Collaborator / Entity</span>
+                        <span>Role</span>
+                        <span>Share (%)</span>
                     </div>
-                    <div class="roster-item">
-                        <div class="roster-info">
-                            <h4>Ferrson</h4>
-                            <span>Artist • Collaborator</span>
-                        </div>
-                        <a href="#" target="_blank" class="roster-link">Listen &rarr;</a>
+                    <div class="split-row">
+                        <span>Abednego Totouw (3H3D)</span>
+                        <span>Producer / Primary Artist</span>
+                        <span>100% / Custom</span>
                     </div>
-                    <div class="roster-item">
-                        <div class="roster-info">
-                            <h4>ANDER</h4>
-                            <span>Solo Artist • Collaborator</span>
-                        </div>
-                        <a href="#" target="_blank" class="roster-link">Listen &rarr;</a>
+                    <div class="split-row">
+                        <span>Ferwap Music Enterprise</span>
+                        <span>Label Administration</span>
+                        <span>Managed</span>
                     </div>
                 </div>
             </section>
 
-            <!-- PAGE 4: SUBMIT / APPLY -->
-            <section id="page-apply" class="page-view">
-                <div class="apply-box">
-                    <span class="section-label">Distribution Desk</span>
-                    <h2>Submit Release or Demo</h2>
-                    <p>Send your audio links, artwork, and release notes directly to our curation desk for review and distribution setup.</p>
+            <!-- TAB 4: UPLOAD / SUBMIT -->
+            <section id="tab-upload" class="dash-view">
+                <div class="upload-container">
+                    <h2>Submit New Release</h2>
+                    <p>Send master metadata, artwork, and audio files for distribution processing.</p>
                     
-                    <form id="inviteForm">
+                    <form id="releaseForm">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="artistName">Artist / Project Name</label>
-                                <input type="text" id="artistName" placeholder="e.g. 3H3D" required>
+                                <label>Release Title</label>
+                                <input type="text" id="relTitle" placeholder="Track Name" required>
                             </div>
                             <div class="form-group">
-                                <label for="artistEmail">Contact Email</label>
-                                <input type="email" id="artistEmail" placeholder="you@domain.com" required>
+                                <label>Primary Artist Name</label>
+                                <input type="text" id="relArtist" placeholder="e.g. 3H3D" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Primary Genre</label>
+                                <input type="text" id="relGenre" placeholder="Electronic / Indie / Pop" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Target Release Date</label>
+                                <input type="date" id="relDate" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="demoLink">Audio / Drive / Catalog Link</label>
-                            <input type="url" id="demoLink" placeholder="https://drive.google.com/..." required>
+                            <label>Audio Master & Artwork Link (Google Drive / Dropbox)</label>
+                            <input type="url" id="relLink" placeholder="https://..." required>
                         </div>
-                        <div class="form-group">
-                            <label for="notes">Release Details & Credits</label>
-                            <textarea id="notes" rows="3" placeholder="Track title, release date target, ISRC (if any), and collaborator credits..."></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary full-width">Dispatch to Desk</button>
+                        <button type="submit" class="btn-solid">Dispatch Release Package</button>
                     </form>
                 </div>
             </section>
 
         </main>
 
-        <footer>
-            &copy; 2026 Ferwap Music Collective. All rights reserved.
+        <footer class="dash-footer">
+            <p>&copy; 2026 Ferwap Music Distribution Services. All rights reserved.</p>
         </footer>
     </div>
 
