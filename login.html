@@ -3,33 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In — FERWAP</title>
+    <title>LOG IN | FERWAP Distribution</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="login-page-bg">
 
-    <div class="app-shell">
-        <main class="viewport center-viewport">
-            <div class="login-container">
-                <h2>PORTAL ACCESS</h2>
-                <p>Enter your artist passcode to access the distribution desk.</p>
-                
-                <form id="loginForm">
-                    <input type="password" id="passcodeInput" placeholder="PASSCODE" required autocomplete="off">
-                    <p id="errorMsg" class="error-text">Invalid passcode.</p>
-                    <button type="submit">ENTER</button>
-                </form>
-
-                <div class="request-link">
-                    <a href="mailto:admin@ferwap.com?subject=%5BRequest%20Passcode%5D">Request an Invite</a>
-                </div>
+    <div class="page-wrapper">
+        <main class="login-main">
+            <div class="security-notice">
+                <strong>We've updated our login for better security.</strong>
+                <p>If you haven't logged in recently, just enter your email and password and hit submit. We'll send you a quick password reset link. After resetting, you can log back in securely.</p>
             </div>
+
+            <form id="loginForm" class="login-form-box">
+                <div class="input-block">
+                    <label for="loginEmail">E-mail</label>
+                    <input type="email" id="loginEmail" placeholder="Email" required>
+                </div>
+
+                <div class="input-block">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                </div>
+
+                <div class="forgot-row">
+                    <a href="mailto:admin@ferwap.com?subject=%5BPassword%20Reset%20Request%5D">FORGOT YOUR PASSWORD?</a>
+                </div>
+
+                <p id="errorMsg" class="error-msg">Invalid email or password.</p>
+
+                <button type="submit" class="btn-pill-white">SUBMIT</button>
+            </form>
         </main>
 
-        <footer class="bottom-nav">
-            <a href="index.html" class="nav-link">HOME</a>
-            <a href="publishing.html" class="nav-link">PUBLISHING</a>
-            <a href="login.html" id="authNavLink" class="nav-link active">LOG IN</a>
+        <footer class="dark-footer">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">f</a>
+                <a href="#" aria-label="Twitter">𝕏</a>
+                <a href="#" aria-label="LinkedIn">in</a>
+            </div>
+            <p class="copyright">&copy;2026 FERWAP Distribution.</p>
+            <p class="powered">Powered by Ferwap Music Entertainment</p>
+            <div class="footer-mini-nav">
+                <a href="index.html">HOME</a> • <a href="publishing.html">PUBLISHING</a>
+            </div>
         </footer>
     </div>
 
