@@ -106,3 +106,44 @@ if (lockBtn) {
         window.location.href = 'index.html';
     });
 }
+
+// 4. Ambil dan Tampilkan Data Publishing Applications di portal.html
+const submissionsContainer = document.getElementById('submissionsContainer');
+if (submissionsContainer) {
+    async function loadPublishingSubmissions() {
+        const { data, error } = await supabase
+            .from('publishing_applications')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            submissionsContainer.innerHTML = `<p style="color: #ef4444; font-size: 0.85rem;">Gagal memuat data: ${error.message}</p>`;
+            return;
+        }
+
+        if (!data || data.length === 0) {
+            submissionsContainer.innerHTML = `<p style="color: #a1a1aa; font-size: 0.85rem;">Belum ada data pendaftaran publishing yang masuk.</p>`;
+            return;
+        }
+
+        let html = '<div style="display: flex; flex-direction: column; gap: 12px;">';
+        data.forEach(item => {
+            html += `
+                <div style="background: #181822; border: 1px solid #2a2a38; border-radius: 6px; padding: 14px 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <strong style="color: #ffffff; font-size: 0.95rem;">${item.first_name} ${item.last_name}</strong>
+                        <span style="font-size: 0.75rem; color: #d4af37; background: rgba(212, 175, 55, 0.1); padding: 2px 8px; border-radius: 4px;">Qty: ${item.publishing_qty}</span>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #a1a1aa; display: flex; flex-wrap: wrap; gap: 16px;">
+                        <span>✉️ ${item.email}</span>
+                        <span>🌍 Country: ${item.country}</span>
+                        <span>📋 Administered: ${item.currently_administrated}</span>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        submissionsContainer.innerHTML = html;
+    }
+    loadPublishingSubmissions();
+}
