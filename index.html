@@ -4,377 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FERWAP — Curated Music Collective & Distribution</title>
-    <style>
-        :root {
-            --bg: #08080a;
-            --surface: #111115;
-            --border: #222228;
-            --text-main: #f4f4f6;
-            --text-muted: #8e8e98;
-            --accent: #ffffff;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Navbar */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 6%;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            background: rgba(8, 8, 10, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-left: 24px;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--text-main);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 110px 6% 90px;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border: 1px solid var(--border);
-            border-radius: 99px;
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.6rem);
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 620px;
-            margin: 0 auto 36px;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background: var(--accent);
-            color: #000;
-            padding: 14px 32px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: opacity 0.2s, transform 0.2s;
-        }
-
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        /* Services / Pillars */
-        .section {
-            padding: 80px 6%;
-            max-width: 1100px;
-            margin: 0 auto;
-            border-top: 1px solid var(--border);
-        }
-
-        .section-title {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 32px;
-            border-radius: 10px;
-        }
-
-        .card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Roster / Featured Releases */
-        .roster-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .roster-item:last-child {
-            border-bottom: none;
-        }
-
-        .roster-info h4 {
-            font-size: 1.05rem;
-        }
-
-        .roster-info span {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .roster-link {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.85rem;
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-
-        .roster-link:hover {
-            background: var(--border);
-        }
-
-        /* Application Form (Invite Only) */
-        .apply-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 640px;
-            margin: 0 auto;
-        }
-
-        .apply-box h2 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-
-        .apply-box p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 12px 14px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-family: inherit;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #555;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 14px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        button[type="submit"]:hover {
-            opacity: 0.9;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 6%;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">FERWAP</div>
-        <nav>
-            <a href="#services">Services</a>
-            <a href="#roster">Roster</a>
-            <a href="#apply">Apply</a>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <span class="badge">Invite-Only Collective & Distribution</span>
-        <h1>Curated Independent Music Collective & Distribution.</h1>
-        <p>Empowering independent artists with global digital distribution, metadata integrity, and creative collaboration—without traditional label bureaucracy.</p>
-        <a href="#apply" class="btn-primary">Apply for an Invite</a>
-    </section>
-
-    <section id="services" class="section">
-        <div class="section-title">What We Do</div>
-        <div class="grid">
-            <div class="card">
-                <h3>Curated Distribution</h3>
-                <p>Seamless delivery to Spotify, Apple Music, YouTube Music, and global streaming platforms with precision metadata standards.</p>
-            </div>
-            <div class="card">
-                <h3>Metadata & Rights Integrity</h3>
-                <p>Structured ISRC, UPC, and transparent songwriting/production credits to protect and organize your catalog properly.</p>
-            </div>
-            <div class="card">
-                <h3>Creative Collective</h3>
-                <p>A collaborative network built for independent creators to share resources, cross-promote releases, and grow together.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="roster" class="section">
-        <div class="section-title">Selected Roster</div>
-        <div class="roster-item">
-            <div class="roster-info">
-                <h4>3H3D</h4>
-                <span>Singer • Songwriter • Producer</span>
-            </div>
-            <a href="https://3h3dofficial.web.id" target="_blank" class="roster-link">Official Site</a>
-        </div>
-        <div class="roster-item">
-            <div class="roster-info">
-                <h4>Ferrson</h4>
-                <span>Artist • Collaborator</span>
-            </div>
-            <a href="#" target="_blank" class="roster-link">Listen</a>
-        </div>
-        <div class="roster-item">
-            <div class="roster-info">
-                <h4>ANDER</h4>
-                <span>Solo Artist • Collaborator</span>
-            </div>
-            <a href="#" target="_blank" class="roster-link">Listen</a>
-        </div>
-    </section>
-
-    <section id="apply" class="section">
-        <div class="apply-box">
-            <h2>Request an Invitation</h2>
-            <p>We review every submission manually to keep our collective focused and personal. Share your demo or existing catalog below.</p>
+    <!-- Login / Access Gate Overlay -->
+    <div id="loginGate" class="gate-overlay">
+        <div class="gate-box">
+            <div class="logo">FERWAP</div>
+            <p class="gate-subtitle">Private Collective & Distribution Portal</p>
             
-            <form id="inviteForm">
+            <form id="loginForm">
                 <div class="form-group">
-                    <label>Artist / Project Name</label>
-                    <input type="text" id="artistName" placeholder="e.g. 3H3D" required>
+                    <input type="password" id="accessCode" placeholder="Enter Invite Passcode" required autocomplete="off">
                 </div>
-                <div class="form-group">
-                    <label>Contact Email</label>
-                    <input type="email" id="artistEmail" placeholder="you@domain.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Demo or Catalog Link (SoundCloud, Drive, Spotify)</label>
-                    <input type="url" id="demoLink" placeholder="https://..." required>
-                </div>
-                <div class="form-group">
-                    <label>Tell Us About Your Project</label>
-                    <textarea id="notes" rows="3" placeholder="Genre, upcoming release plans, or distribution needs..."></textarea>
-                </div>
-                <button type="submit">Submit Application</button>
+                <p id="loginError" class="error-msg">Invalid access code. Please check your invitation.</p>
+                <button type="submit">Enter Portal</button>
             </form>
+
+            <div class="gate-footer">
+                <span>Don't have an invite code?</span>
+                <a href="mailto:admin@ferwap.com?subject=%5BFerwap%20Invite%20Request%5D">Request Access</a>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        &copy; 2026 Ferwap Music Collective. All rights reserved.
-    </footer>
+    <!-- Main Website Content (Hidden until logged in) -->
+    <div id="mainContent" class="hidden">
+        <header>
+            <div class="logo">FERWAP</div>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#roster">Roster</a>
+                <a href="#apply">Apply</a>
+                <a href="#" id="logoutBtn" class="logout-link">Lock</a>
+            </nav>
+        </header>
 
-    <script>
-        document.getElementById('inviteForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('artistName').value;
-            const email = document.getElementById('artistEmail').value;
-            const link = document.getElementById('demoLink').value;
-            const notes = document.getElementById('notes').value;
+        <section class="hero">
+            <span class="badge">Invite-Only Collective & Distribution</span>
+            <h1>Curated Independent Music Collective & Distribution.</h1>
+            <p>Empowering independent artists with global digital distribution, metadata integrity, and creative collaboration—without traditional label bureaucracy.</p>
+            <a href="#apply" class="btn-primary">Apply for an Invite</a>
+        </section>
 
-            const subject = encodeURIComponent(`[Ferwap Invite Application] ${name}`);
-            const body = encodeURIComponent(
-                `Artist/Project Name: ${name}\nEmail: ${email}\nDemo/Catalog Link: ${link}\n\nProject Notes:\n${notes}`
-            );
+        <section id="services" class="section">
+            <div class="section-title">What We Do</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Curated Distribution</h3>
+                    <p>Seamless delivery to Spotify, Apple Music, YouTube Music, and global streaming platforms with precision metadata standards.</p>
+                </div>
+                <div class="card">
+                    <h3>Metadata & Rights Integrity</h3>
+                    <p>Structured ISRC, UPC, and transparent songwriting/production credits to protect and organize your catalog properly.</p>
+                </div>
+                <div class="card">
+                    <h3>Creative Collective</h3>
+                    <p>A collaborative network built for independent creators to share resources, cross-promote releases, and grow together.</p>
+                </div>
+            </div>
+        </section>
 
-            // Replace with your official contact email
-            window.location.href = `mailto:admin@ferwap.com?subject=${subject}&body=${body}`;
-        });
-    </script>
+        <section id="roster" class="section">
+            <div class="section-title">Selected Roster</div>
+            <div class="roster-item">
+                <div class="roster-info">
+                    <h4>3H3D</h4>
+                    <span>Singer • Songwriter • Producer</span>
+                </div>
+                <a href="https://3h3dofficial.web.id" target="_blank" class="roster-link">Official Site</a>
+            </div>
+            <div class="roster-item">
+                <div class="roster-info">
+                    <h4>Ferrson</h4>
+                    <span>Artist • Collaborator</span>
+                </div>
+                <a href="#" target="_blank" class="roster-link">Listen</a>
+            </div>
+            <div class="roster-item">
+                <div class="roster-info">
+                    <h4>ANDER</h4>
+                    <span>Solo Artist • Collaborator</span>
+                </div>
+                <a href="#" target="_blank" class="roster-link">Listen</a>
+            </div>
+        </section>
 
+        <section id="apply" class="section">
+            <div class="apply-box">
+                <h2>Request an Invitation</h2>
+                <p>We review every submission manually to keep our collective focused and personal. Share your demo or existing catalog below.</p>
+                
+                <form id="inviteForm">
+                    <div class="form-group">
+                        <label for="artistName">Artist / Project Name</label>
+                        <input type="text" id="artistName" placeholder="e.g. 3H3D" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="artistEmail">Contact Email</label>
+                        <input type="email" id="artistEmail" placeholder="you@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="demoLink">Demo or Catalog Link (SoundCloud, Drive, Spotify)</label>
+                        <input type="url" id="demoLink" placeholder="https://..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Tell Us About Your Project</label>
+                        <textarea id="notes" rows="3" placeholder="Genre, upcoming release plans, or distribution needs..."></textarea>
+                    </div>
+                    <button type="submit">Submit Application</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 Ferwap Music Collective. All rights reserved.
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
