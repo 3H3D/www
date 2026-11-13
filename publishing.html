@@ -3,40 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publishing — FERWAP</title>
+    <title>FERWAP Music Publishing</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="publishing-page-bg">
 
-    <div class="app-shell">
-        <main class="viewport center-viewport">
-            <div class="subpage-container">
-                <span class="eyebrow">Publishing & Distribution</span>
-                <h2>Global Rights & Catalog Management</h2>
-                <p class="lead">
-                    Curated distribution, transparent royalty splits, and global publishing administration built for modern creators.
+    <div class="page-wrapper">
+        <main class="publishing-main">
+            <div class="pub-intro">
+                <p class="pub-top-text">
+                    publishing negotiations and contracts, providing you with the support needed to secure favorable terms.
                 </p>
-                <div class="info-columns">
-                    <div class="info-item">
-                        <h3>Distribution</h3>
-                        <p>Direct delivery to Spotify, Apple Music, YouTube Music, and global DSPs with clean ISRC & UPC metadata.</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Publishing</h3>
-                        <p>Composition protection, mechanical & performance royalty collection, and catalog registration.</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Apply for Invite</h3>
-                        <p>We review submissions manually. Send your catalog link directly to <a href="mailto:admin@ferwap.com?subject=%5BFerwap%20Invite%20Application%5D">admin@ferwap.com</a>.</p>
-                    </div>
-                </div>
+                <p class="pub-main-text">
+                    Apply for our publishing administration services and let us ensure your music's earnings are fully realized across the globe.
+                </p>
             </div>
+
+            <section class="pub-form-section">
+                <h2>Apply for Publishing Admin</h2>
+
+                <form id="publishingForm" class="pub-grid-form">
+                    <div class="pub-grid">
+                        <div class="pub-field">
+                            <label for="pubFirstName">First Name</label>
+                            <input type="text" id="pubFirstName" required>
+                        </div>
+                        <div class="pub-field">
+                            <label for="pubLastName">Last Name</label>
+                            <input type="text" id="pubLastName" required>
+                        </div>
+                        <div class="pub-field">
+                            <label for="pubQty">Publishing Qty</label>
+                            <input type="text" id="pubQty" required>
+                        </div>
+                        <div class="pub-field">
+                            <label for="pubAdministered">Currently Administrated?</label>
+                            <input type="text" id="pubAdministered" placeholder="Yes/No" required>
+                        </div>
+                        <div class="pub-field">
+                            <label for="pubCountry">Country</label>
+                            <input type="text" id="pubCountry" required>
+                        </div>
+                        <div class="pub-field">
+                            <label for="pubEmail">Email</label>
+                            <input type="email" id="pubEmail" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-pill-navy">SUBMIT</button>
+                </form>
+            </section>
         </main>
 
-        <footer class="bottom-nav">
-            <a href="index.html" class="nav-link">HOME</a>
-            <a href="publishing.html" class="nav-link active">PUBLISHING</a>
-            <a href="login.html" id="authNavLink" class="nav-link">LOG IN</a>
+        <footer class="dark-footer">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">f</a>
+                <a href="#" aria-label="Twitter">𝕏</a>
+                <a href="#" aria-label="LinkedIn">in</a>
+            </div>
+            <p class="copyright">&copy;2026 FERWAP Distribution.</p>
+            <p class="powered">Powered by Ferwap Music Entertainment</p>
+            <div class="footer-mini-nav">
+                <a href="index.html">HOME</a> • <a href="login.html">LOG IN</a>
+            </div>
         </footer>
     </div>
 
